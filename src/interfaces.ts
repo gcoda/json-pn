@@ -8,9 +8,7 @@ export type Serializable =
     | number
     | string
     | SerializableArray
-    | {
-          [index: string]: Serializable
-      }
+    | { [index: string]: Serializable }
 
 /**
  * Valid template JSON object

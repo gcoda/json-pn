@@ -107,9 +107,7 @@ describe('operators', () => {
             const template = compiler({
                 '@map': [
                     [1, 2, 3, 4, 5],
-                    {
-                        '@mul': [{ '@': 'x' }, 2],
-                    },
+                    { '@mul': [{ '@': 'x' }, 2] },
                     'x',
                     'i',
                 ],
