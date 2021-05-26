@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "repository": {
         "type": "git",
-        "url": "https://github.com/DmShpak/json-pn.git"
+        "url": "https://github.com/gcoda/json-pn"
     },
     "description": "JSON templates in prefix notation",
     "main": "lib/index.js",
@@ -14,7 +14,10 @@
         "prepublish": "tsc -p ./",
         "compile": "tsc -p ./"
     },
-    "author": "",
+    "author": {
+        "name": "DmShpak",
+        "url": "https://github.com/DmShpak/json-pn"
+    },
     "license": "MIT",
     "devDependencies": {
         "jasmine": "^2.8.0",
