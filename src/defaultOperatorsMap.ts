@@ -10,15 +10,13 @@ import { unar, binar, triar } from './tools'
 const extract = (target: Object, path: any[]) => {
     if (path.length === 0) {
         return target
-    }
-    else {
+    } else {
         const [...subpath] = path
         const key = subpath.shift().toString()
 
         if (target.hasOwnProperty(key)) {
             return extract(target[key], subpath)
-        }
-        else {
+        } else {
             return undefined
         }
     }
@@ -28,10 +26,12 @@ export const defaultOperationsMap: OperationsMap = {
     //Extract value from poperties
     '@': compiler => value => props => {
         const compiledValue = compiler(value)(props)
-        const path = Array.isArray(compiledValue) ? compiledValue : [compiledValue]
+        const path = Array.isArray(compiledValue)
+            ? compiledValue
+            : [compiledValue]
         return extract(props, path)
     },
-    //Avoid processing of value 
+    //Avoid processing of value
     '@escape': compiler => value => props => value,
     // logical operators
     '@not': unar(x => !x),
@@ -49,7 +49,7 @@ export const defaultOperationsMap: OperationsMap = {
     '@mul': binar((x, y) => x * y),
     '@div': binar((x, y) => x / y),
     //
-    '@if': triar((opt, yes, no) => opt ? yes : no),
+    '@if': triar((opt, yes, no) => (opt ? yes : no)),
     //array
     '@map': compiler => value => {
         if (!Array.isArray(value)) {
@@ -65,18 +65,16 @@ export const defaultOperationsMap: OperationsMap = {
         const indexName = compiler(value[3])
         return props => {
             if (typeof props === 'object') {
-                const compiledList = list(props) as Array<any>;
+                const compiledList = list(props) as Array<any>
                 return compiledList.map((value, index) => {
                     const extended = {
-                        ...(props as Object), 
+                        ...(props as Object),
                         [valueName(props).toString()]: value,
-                        [indexName(props).toString()]: index,    
-                    } 
+                        [indexName(props).toString()]: index,
+                    }
                     return compiler(map)(extended)
                 })
-    
             }
         }
-
-    }
+    },
 }

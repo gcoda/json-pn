@@ -1,15 +1,13 @@
 const { createCompiler } = require('../lib/index')
 
-
 describe('check interfaces', () => {
     it('createCompiler interface', () => {
         expect(typeof createCompiler()).toBe('function')
     })
 })
 
-
 describe('check regular types', () => {
-    let compiler;
+    let compiler
 
     beforeAll(() => {
         compiler = createCompiler()
@@ -34,7 +32,6 @@ describe('check regular types', () => {
     })
 
     it('array template', () => {
-
         const template1 = compiler([])
         const template2 = compiler([1, 2, 'three', false])
         expect(typeof template1).toBe('function')
@@ -44,17 +41,14 @@ describe('check regular types', () => {
     })
 
     it('pure object template', () => {
-        const template = compiler({ 'foo': 'baz' })
+        const template = compiler({ foo: 'baz' })
         expect(typeof template).toBe('function')
-        expect(template()).toEqual({ 'foo': 'baz' })
+        expect(template()).toEqual({ foo: 'baz' })
     })
-
-
 })
 
-
 describe('operators', () => {
-    let compiler;
+    let compiler
 
     beforeAll(() => {
         compiler = createCompiler()
@@ -67,19 +61,18 @@ describe('operators', () => {
     })
 
     describe('default operators', () => {
-
-        it ('extract parameters', () => {
+        it('extract parameters', () => {
             const template1 = compiler({ '@': 'a' })
             const template2 = compiler({ '@': ['a'] })
             const template3 = compiler({ '@': [] })
             const template4 = compiler({ '@': ['a', 'b'] })
-            
-            expect(template1({'a':10})).toBe(10)
-            expect(template1({'b':10})).toBe(undefined)
-            expect(template2({'a':10})).toBe(10)
-            expect(template3({'foo':'baz'})).toEqual({'foo': 'baz'})
+
+            expect(template1({ a: 10 })).toBe(10)
+            expect(template1({ b: 10 })).toBe(undefined)
+            expect(template2({ a: 10 })).toBe(10)
+            expect(template3({ foo: 'baz' })).toEqual({ foo: 'baz' })
             expect(template4({})).toEqual(undefined)
-            expect(template4({a:{b:11}})).toEqual(11)
+            expect(template4({ a: { b: 11 } })).toEqual(11)
         })
 
         it('add', () => {
@@ -104,31 +97,23 @@ describe('operators', () => {
 
         it('if', () => {
             const template = compiler({
-                '@if': [{ '@': 'x' },
-                    'foo',
-                    'baz'
-                ]
+                '@if': [{ '@': 'x' }, 'foo', 'baz'],
             })
             expect(template({ x: true })).toBe('foo')
             expect(template({ x: false })).toBe('baz')
         })
 
-        it ('map', () => {
+        it('map', () => {
             const template = compiler({
                 '@map': [
-                    [ 1, 2, 3, 4, 5],
+                    [1, 2, 3, 4, 5],
                     {
-                        '@mul': [{'@':'x'}, 2]
+                        '@mul': [{ '@': 'x' }, 2],
                     },
                     'x',
-                    'i'
-                ]
+                    'i',
+                ],
             })
-
         })
-
     })
-
-
 })
-

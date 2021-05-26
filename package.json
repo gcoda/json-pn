@@ -1,23 +1,23 @@
 {
-  "name": "json-pn",
-  "version": "1.0.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DmShpak/json-pn.git"
-  },
-  "description": "JSON templates in prefix notation",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "test": "jasmine",
-    "run": "tsc -p ./ -w",
-    "prepublish": "tsc -p ./",
-    "compile": "tsc -p ./"
-  },
-  "author": "",
-  "license": "MIT", 
-  "devDependencies": {
-    "jasmine": "^2.8.0",
-    "typescript": "^2.6.1"
-  }
+    "name": "json-pn",
+    "version": "1.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DmShpak/json-pn.git"
+    },
+    "description": "JSON templates in prefix notation",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "scripts": {
+        "test": "jasmine",
+        "run": "tsc -p ./ -w",
+        "prepublish": "tsc -p ./",
+        "compile": "tsc -p ./"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "jasmine": "^2.8.0",
+        "typescript": "^2.6.1"
+    }
 }

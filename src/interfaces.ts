@@ -1,11 +1,16 @@
 /**
  * Serializable object can be serialized to pure JSON string
  */
-export interface SerializableArray extends Array<Serializable> { }
+export interface SerializableArray extends Array<Serializable> {}
 
-export type Serializable = boolean | number | string | SerializableArray | {
-    [index: string]: Serializable
-}
+export type Serializable =
+    | boolean
+    | number
+    | string
+    | SerializableArray
+    | {
+          [index: string]: Serializable
+      }
 
 /**
  * Valid template JSON object
@@ -32,7 +37,9 @@ export interface Compiler {
 }
 
 export interface OperationHandler {
-    <P extends Object>(compile: Compiler): (value: TemplateObject) => (props: P) => TemplateOutput
+    <P extends Object>(compile: Compiler): (
+        value: TemplateObject,
+    ) => (props: P) => TemplateOutput
 }
 
 export interface OperationsMap {

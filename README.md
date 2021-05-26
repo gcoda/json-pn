@@ -8,41 +8,44 @@ Sometimes you would like to encode JSON template by JSON object.
 
 # Features
 
-* Template encoded by JSON object in Polish notation
-* Support of mathematical and logical operations
-* Support of custom operations
-* Conditional operator
-* Map operator
+-   Template encoded by JSON object in Polish notation
+-   Support of mathematical and logical operations
+-   Support of custom operations
+-   Conditional operator
+-   Map operator
 
-# Usage 
+# Usage
 
 ## Include
 
 ```js
-import {createCompiler} from 'json-pn'
+import { createCompiler } from 'json-pn'
 ```
 
 ## Create compiler
+
 ```js
 const compiler = createCompiler()
 ```
 
 ## Create template function
+
 ```js
-const hello = compiler({'@add': ["Hello", {'@':'value'}]})
+const hello = compiler({ '@add': ['Hello', { '@': 'value' }] })
 ```
 
 ## Use template function
 
 ```js
-console.log(hello({value:' word'})) //Hello word
+console.log(hello({ value: ' word' })) //Hello word
 ```
+
 ## Custom operators
 
-You can manually set list of supported operators. 
+You can manually set list of supported operators.
 
 ```js
-import {createCompiler, defaultOperationsMap} from 'json-pn'
+import { createCompiler, defaultOperationsMap } from 'json-pn'
 const compiler = createCompiler(defaultOperationsMap)
 ```
 
@@ -54,7 +57,7 @@ import {createCompiler, defaultOperationsMap} from 'json-pn'
 const double = compiler => value => {
     const subtemplate = compiler(value)
     return  props =>  subtemplate(props) * 2
-} 
+}
 
 const compiler = createCompiler({
     ...defaultOperationsMap,
@@ -73,12 +76,16 @@ console.log(four())//4
 ### Unar operators
 
 Unar operator use value as single parameter
+
 ```js
 // ! true
 {'@not': true}
-```    
+```
+
 ### N-ar operatprs
-N-ar operators always expects array fixed length. According to operands count can be defined **binar**, **triar**, and other operators 
+
+N-ar operators always expects array fixed length. According to operands count can be defined **binar**, **triar**, and other operators
+
 ```js
 // 2 + 4
 {'@add': [ 2, 4 ]}
@@ -89,25 +96,28 @@ N-ar operators always expects array fixed length. According to operands count ca
 ## Operators grpups
 
 ### Template parameters
-####  @ operator 
-Unar operator expects *string* or *string[]* in operand. 
+
+#### @ operator
+
+Unar operator expects _string_ or _string[]_ in operand.
 
 ### Special
 
-#### @escape operator 
-Unar operator.  Just copy operand value without any transformations.
+#### @escape operator
+
+Unar operator. Just copy operand value without any transformations.
 
 ### Mathematical
 
-#### @add 
+#### @add
 
 Binar operator.
 
-#### @rem 
+#### @rem
 
 Binar operator.
 
-#### @mul 
+#### @mul
 
 Binar operator.
 
@@ -128,7 +138,6 @@ Binar operator.
 #### @or
 
 Binar operator.
-
 
 ### Comparation
 
@@ -178,4 +187,4 @@ Tetrar operator. Allows to use template for each array item.
         "x","i"
     ]
 }
-``` 
+```
