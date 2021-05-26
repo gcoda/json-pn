@@ -1,24 +1,18 @@
-import {
-    Compiler,
-    TemplateObject,
-    TemplateFunction,
-    OperationsMap,
-} from './interfaces'
+import { Compiler, SerializableObject } from './interfaces'
 import { defaultOperationsMap } from './defaultOperatorsMap'
 
 export function createCompiler(operatorsMap = defaultOperationsMap): Compiler {
-    const compiler: Compiler = <P extends Object>(
-        template: TemplateObject,
-    ): TemplateFunction<P> => {
+    const compiler: Compiler = template => {
         switch (typeof template) {
             case 'number':
             case 'string':
             case 'boolean':
                 return () => template
             case 'object':
+                if (template === null) return () => null
+
                 if (Array.isArray(template)) {
-                    return props =>
-                        template.map(item => compiler<P>(item)(props))
+                    return props => template.map(item => compiler(item)(props))
                 }
 
                 for (let i = 0; i < operatorNames.length; i++) {
@@ -34,7 +28,7 @@ export function createCompiler(operatorsMap = defaultOperationsMap): Compiler {
                 }
 
                 return props => {
-                    let res = {}
+                    const res: SerializableObject = {}
                     Object.keys(template).forEach(key => {
                         res[key] = compiler(template[key])(props)
                     })
@@ -42,7 +36,7 @@ export function createCompiler(operatorsMap = defaultOperationsMap): Compiler {
                 }
 
             default:
-                throw new Error('wrong template')
+                return () => undefined
         }
     }
 

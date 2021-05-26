@@ -2,7 +2,13 @@
     "compilerOptions": {
         "outDir": "lib",
         "declaration": true,
-        "declarationDir": "lib"
+        "declarationDir": "lib",
+        "strict": true,
+        "target": "ES6",
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "esModuleInterop": true
     },
     "include": ["src"]
 }

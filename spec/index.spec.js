@@ -74,6 +74,11 @@ describe('operators', () => {
             expect(template4({})).toEqual(undefined)
             expect(template4({ a: { b: 11 } })).toEqual(11)
         })
+        it('extract undefined parameters', () => {
+            const template4 = compiler({ '@': ['a', 'b', 'c'] })
+            expect(template4({ a: 10 })).toBe(undefined)
+            // expect(template4({ a: { b: { c: null } } })).toBe(null)
+        })
 
         it('add', () => {
             const template = compiler({ '@add': [4, 2] })
@@ -90,9 +95,14 @@ describe('operators', () => {
             expect(template()).toBe(11)
         })
 
+        it('div by zero', () => {
+            const template = compiler({ '@div': [22, 0] })
+            expect(template()).toBe(Infinity)
+        })
+
         it('sub', () => {
-            const template = compiler({ '@div': [22, 2] })
-            expect(template()).toBe(11)
+            const template = compiler({ '@sub': [22, 2] })
+            expect(template()).toBe(20)
         })
 
         it('if', () => {
@@ -114,5 +124,14 @@ describe('operators', () => {
             })
             expect(template({})).toEqual([2, 4, 6, 8, 10])
         })
+
+        it('null and undefined', () => {
+            const template = compiler({
+                '@if': [{ '@': 'x' }, null, undefined],
+            })
+            expect(template({ x: true })).toBe(null)
+            expect(template({ x: false })).toBe(undefined)
+        })
+        /**/
     })
 })

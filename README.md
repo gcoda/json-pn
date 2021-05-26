@@ -1,4 +1,12 @@
-# json-pn
+# nullable-json-pn
+
+> Fork of [_json-pn_](https://github.com/DmShpak/json-pn)
+>
+> with support of nullable fields for more **flaky** operations
+
+---
+
+---
 
 Simple JSON template language in [Polish notation](https://en.wikipedia.org/wiki/Polish_notation)
 

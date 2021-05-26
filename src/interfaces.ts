@@ -4,12 +4,15 @@
 export interface SerializableArray extends Array<Serializable> {}
 
 export type Serializable =
+    | undefined
+    | null
     | boolean
     | number
     | string
     | SerializableArray
     | { [index: string]: Serializable }
 
+export type SerializableObject = Record<string, Serializable>
 /**
  * Valid template JSON object
  */
@@ -30,12 +33,12 @@ export interface TemplateFunction<P> {
 /**
  * Compiler uses Template object ro create Template function
  */
-export interface Compiler {
-    <P extends Object>(template: TemplateObject): TemplateFunction<P>
+export interface Compiler<P = SerializableObject> {
+    (template: TemplateObject): TemplateFunction<P>
 }
 
-export interface OperationHandler {
-    <P extends Object>(compile: Compiler): (
+export interface OperationHandler<P = SerializableObject> {
+    (compile: Compiler<P>): (
         value: TemplateObject,
     ) => (props: P) => TemplateOutput
 }
