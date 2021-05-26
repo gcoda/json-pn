@@ -114,6 +114,7 @@ describe('operators', () => {
                     'i',
                 ],
             })
+            expect(template({})).toEqual([2, 4, 6, 8, 10])
         })
     })
 })
